@@ -1,0 +1,15 @@
+{% extends "my_admin/base.html" %}
+{% load blog_extras %}
+
+{% block content %}
+{% if object_list %}
+<ul>
+	{% for tag in object_list %}
+	<li>{{tag.name|lower}}</li>
+	{% endfor %}
+</ul>
+{% else %}
+<p>No Tags to display</p>
+{% endif %}
+<a href="{% url 'new_tag' %}"> Create New Tag </a>
+{% endblock %}

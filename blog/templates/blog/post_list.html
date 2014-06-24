@@ -1,0 +1,30 @@
+{% extends "my_admin/base.html" %}
+
+{% block content %}
+{% if object_list %}
+<table>
+<th>No</th>
+<th>Title</th>
+<th>Author</th>
+<th>Status</th>
+<th>Created At</th>
+<th>Last Updated On</th>
+{% for post in object_list %}
+	<tr>
+		<td>{{forloop.counter}}</td>
+		<td>{{post.title}}</td>
+		<td>{{post.author}}</td>
+		<td>{{post.status|yesno:"Active, Not Published" }}</td>
+		<td>{{post.created_at}}</td>
+		<td>{{post.updated_at}}</td>
+		<td> <a href="{% url 'postedit' post.id %}">Edit</a> | <a href="{% url 'postdelete' post.id %}">Delete</a> </td>
+	</tr>
+{% endfor %}
+</table>
+	
+
+{% else %}
+<p>No Posts to display</p>
+{% endif %}
+<a href="{% url 'new_post' %}"> Create New Post </a>
+{% endblock %}
